@@ -1,0 +1,65 @@
+===== METRODS =====
+
+1. Gestión de estaciones
+   1.1 Agregar estación
+   1.2 Modificar estación
+   1.3 Eliminar estación
+   1.4 Consultar estación
+   1.5 Mostrar todas las estaciones
+
+2. Gestión de pasajeros
+   2.1 Registrar pasajero
+   2.2 Mostrar cola de espera
+   2.3 Abordar pasajero
+   2.4 Atender pasajeros
+
+3. Gestión de trenes
+   3.1 Registrar tren
+   3.2 Modificar tren
+   3.3 Eliminar tren
+   3.4 Consultar tren
+   3.5 Mostrar trenes
+
+4. Simulación de viaje
+   4.1 Seleccionar estación origen
+   4.2 Seleccionar estación destino
+   4.3 Buscar ruta
+   4.4 Simular recorrido
+   4.5 Registrar viaje realizado
+
+5. Búsquedas
+   5.1 Buscar estación por nombre
+   5.2 Buscar estación por ID
+   5.3 Buscar tren por ID
+   5.4 Buscar ruta entre origen y destino
+   5.5 Buscar estaciones conectadas a una estación
+   5.6 Buscar estaciones de una línea
+   5.7 Buscar transbordos disponibles
+   5.8 Buscar todas las rutas posibles entre dos estaciones
+
+6. Ordenamientos
+   6.1 Ordenar estaciones por nombre
+   6.2 Ordenar estaciones por demanda
+   6.3 Ordenar trenes por capacidad
+
+7. Red del metro
+   7.1 Agregar conexión
+   7.2 Eliminar conexión
+   7.3 Mostrar conexiones
+   7.4 Mostrar estaciones conectadas
+
+8. Estadísticas
+   8.1 Total de estaciones
+   8.2 Total de pasajeros
+   8.3 Total de viajes realizados
+   8.4 Estación más concurrida
+   8.5 Estación menos concurrida
+   8.6 Línea con más estaciones
+   8.7 Cantidad de conexiones
+
+9. Historial de viajes
+   9.1 Ver último viaje
+   9.2 Mostrar historial completo
+   9.3 Eliminar último registro
+
+10. Salir

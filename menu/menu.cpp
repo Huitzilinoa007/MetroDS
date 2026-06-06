@@ -1,5 +1,6 @@
 #include<iostream>
 #include "menu.h"
+#include "../paciente/paciente.cpp"
 
 using namespace std;
 
@@ -61,7 +62,45 @@ void menuPrincipal(){
 //Los cout's sólo los puse para probar que funcione
 //se los puedes quitar después, va?
 void menuPacientes(){
-    cout<<"Pacientes";
+    bool verifi;
+    do{
+        cout<<"\n\n=================================";
+        cout<<"\nPacientes";
+        cout<<"\n=================================";
+        cout<<"\n\n1.- Registrar paciente";
+        cout<<"\n2.- Modifiar paciente";
+        cout<<"\n3.- Eliminar paciente";
+        cout<<"\n4.- Consultar paciente";
+        cout<<"\n5.- Mostrar todos los pacientes";
+        cout<<"\n6.- Salir\n\nIngrese el número de la operación que desea realizar: ";
+        cout<<"";
+
+        int opc = 0;
+        cin>>opc;
+
+        switch (opc){
+        case 1:
+            insertPaciente();
+        case 2:
+            updatePaciente();
+            break;
+        case 3:
+            deletePaciente();
+            break;
+        case 4:
+            findPaciente();
+            break;
+        case 5:
+            findAllPacientes();
+            break;
+        case 6:
+            verifi = false;
+        default:
+            verifi = false;
+            break;
+        }
+
+    }while(verifi);
 }
 void menuConsultorios(){
     cout<<"Consultorios";

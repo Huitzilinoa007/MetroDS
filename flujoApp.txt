@@ -19,7 +19,7 @@ Seleccione una opción:
 1. PACIENTES
 =================================
 
-1. Registrar paciente
+1. Dar de alta paciente
 2. Modificar paciente
 3. Eliminar paciente
 4. Consultar paciente
@@ -43,9 +43,9 @@ Seleccione una opción:
 3. ATENCIÓN MÉDICA
 =================================
 
-1. Agregar paciente a la cola
+1. Agregar paciente a lista de espera
 2. Atender siguiente paciente
-3. Mostrar cola de espera
+3. Mostrar lista de espera
 4. Mostrar pacientes por consultorio
 5. Regresar
 

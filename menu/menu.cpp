@@ -1,6 +1,7 @@
 #include<iostream>
 #include "menu.h"
 #include "../paciente/paciente.cpp"
+#include "../consultorio/consultorio.h"
 
 using namespace std;
 
@@ -104,8 +105,49 @@ void menuPacientes(){
 
     }while(verifi);
 }
+//lo modifiqué para hacer pruebitas
 void menuConsultorios(){
-    cout<<"Consultorios";
+    bool verifi;
+    do{
+        cout<<"\n\n=================================";
+        cout<<"\nConsultorios";
+        cout<<"\n=================================";
+        cout<<"\n\n1.- Registrar consultorio";
+        cout<<"\n2.- Modificar consultorio";
+        cout<<"\n3.- Eliminar consultorio";
+        cout<<"\n4.- Buscar consultorio";
+        cout<<"\n5.- Mostrar todos los consultorios";
+        cout<<"\n6.- Salir\n\nIngrese el número de la operación que desea realizar: ";
+        cout<<"";
+
+        int opc = 0;
+        cin>>opc;
+
+        switch (opc){
+        case 1:
+            insertConsultorio();
+            break;
+        case 2:
+            updateConsultorio();
+            break;
+        case 3:
+            deleteConsultorio();
+            break;
+        case 4:
+            findConsultorio();
+            break;
+        case 5:
+            findAllConsultorios();
+            break;
+        case 6:
+            verifi = false;
+            break;
+        default:
+            verifi = false;
+            break;
+        }
+
+    }while(verifi);
 }
 void menuAtencionMedica(){
     cout<<"Atención médica";

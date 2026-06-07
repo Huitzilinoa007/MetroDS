@@ -9,7 +9,8 @@ void deletePaciente();
 void findPaciente();
 void findAllPacientes();
 
-NodoPaciente* getPaciente(char nss[11]);
+NodoPaciente* getPacienteByNSS(char nss[11]);
+bool deletePacienteByNSS(char nssPaciente[11]);
 void printPaciente(NodoPaciente* paciente);
 const char* getNivelPrioridad(int prioridad);
 const char* getEstadoRevision(int estadoRevision);

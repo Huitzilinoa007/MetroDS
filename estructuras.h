@@ -3,7 +3,6 @@
 
 //PACIENTES
 struct Paciente{
-    int idPaciente;
     char nombre[40];
     char apellidos[40];
     int edad;

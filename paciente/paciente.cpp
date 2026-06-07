@@ -44,16 +44,12 @@ void insertPaciente(){
 
     //aquí se pone el nuevo paciente en la lista de pacientes
     if(headPaciente==NULL){
-        newPaciente->paciente.idPaciente = 1;
         headPaciente = newPaciente;
     }else{
-        int idPaciente = 1;
         NodoPaciente* temp = headPaciente;
         while(temp->siguiente != NULL){
             temp=temp->siguiente;
-            idPaciente++;
         }
-        newPaciente->paciente.idPaciente = idPaciente;
         temp->siguiente = newPaciente;
     }
 
@@ -76,7 +72,7 @@ void updatePaciente(){
     cout<<"\n\nIngrese el NSS del paciente a actualizar su información: ";
     cin>>nss;
 
-    NodoPaciente* nodoPaciente = getPaciente(nss);
+    NodoPaciente* nodoPaciente = getPacienteByNSS(nss);
     if(nodoPaciente == NULL){
         cout<<"\nNo se encontró al paciente con NSS: "<< nss << "\nIntente con otro NSS.";
         return;
@@ -183,30 +179,48 @@ void deletePaciente(){
     cout<<"\n\nIngrese el NSS del paciente a eliminar: ";
     cin>>nss;
 
-    NodoPaciente* nodoPaciente = getPaciente(nss);
+    bool pacienteBorrado = deletePacienteByNSS(nss);
+    if(deletePacienteByNSS){
+        cout<<"El paciente con NSS: " << nss << " fue eliminado con éxito";
+    }else{
+        cout<<"No se encontró al paciente con NSS: " << nss << "\nIntente con otro NSS.";
+    }
+    
+}
+
+void findPaciente(){
+    if(headPaciente == NULL){
+        cout<<"\nNo hay pacientes registrados, vaya al menú 'Registrar paciente'";
+        return;
+    }
+
+    char nss[11];
+    cout<<"\n\n=======================================";
+    cout<<"\nConsultar paciente";
+    cout<<"\n=======================================";
+    cout<<"\n\nIngrese el NSS del paciente a consultar: ";
+    cin>>nss;
+
+    NodoPaciente* nodoPaciente = getPacienteByNSS(nss);
     if(nodoPaciente == NULL){
         cout<<"\nNo se encontró al paciente con NSS: "<< nss << "\nIntente con otro NSS.";
         return;
     }else{
-        
+        printPaciente(nodoPaciente);
     }
 }
 
-void findPaciente(){
-
-}
 
 void findAllPacientes()
 {
+    if(headPaciente == NULL)
+    {
+        cout << "\nNo hay pacientes registrados, vaya al menú 'Registrar paciente'";
+        return;
+    }
     cout << "\n\n========================================";
     cout << "\nLISTADO DE PACIENTES";
     cout << "\n========================================\n";
-
-    if(headPaciente == NULL)
-    {
-        cout << "\nNo hay pacientes registrados.\n";
-        return;
-    }
     NodoPaciente* temp = headPaciente;
 
     while(temp != NULL)
@@ -218,7 +232,7 @@ void findAllPacientes()
     cout << "\n========================================\n";
 }
 
-NodoPaciente* getPaciente(char nssPaciente[11]){
+NodoPaciente* getPacienteByNSS(char nssPaciente[11]){
     NodoPaciente* aux = headPaciente;
 
     while(aux != NULL){
@@ -231,10 +245,38 @@ NodoPaciente* getPaciente(char nssPaciente[11]){
     return NULL;
 }
 
+bool deletePacienteByNSS(char nssPaciente[11]){
+    //Para la lista vacía
+     if(headPaciente == NULL){
+        return false;
+    }
+
+    // Caso especial: borrar el primero
+    if(strcmp(headPaciente->paciente.nss, nssPaciente) == 0){
+        NodoPaciente* temp = headPaciente;
+        headPaciente = headPaciente->siguiente;
+        free(temp);
+        return true;
+    }
+
+    NodoPaciente* aux = headPaciente;
+    while(aux->siguiente != NULL){
+        if(strcmp(aux->siguiente->paciente.nss, nssPaciente) == 0){
+            NodoPaciente* temp = aux->siguiente;
+            aux->siguiente = temp->siguiente;
+            free(temp);
+            return true;
+        }
+        aux = aux->siguiente;
+    }
+
+    return false;
+}
+
 void printPaciente(NodoPaciente* paciente){
-    cout << "\n----------------------------------------";
-    cout << "\nPACIENTE #" << paciente->paciente.idPaciente;
-    cout << "\n----------------------------------------";
+    cout << "\n-----------------------------------------";
+    cout << "\n" << paciente->paciente.nombre << " " << paciente->paciente.apellidos;
+    cout << "\n-----------------------------------------";
 
     cout << "\nNombre(s): "<< paciente->paciente.nombre;
     cout << "\nApellidos: "<< paciente->paciente.apellidos;

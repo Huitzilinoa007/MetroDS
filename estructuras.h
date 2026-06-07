@@ -22,8 +22,8 @@ struct NodoPaciente{
 struct Consultorio
 {
     int numero;
-    char medico[60];
-    char paciente[60];
+    char medico[80];
+    char paciente[80];
     int estado;
     int disponibilidad;
 };
@@ -37,7 +37,8 @@ struct NodoConsultorio
 //Lista de Espera
 struct NodoListaEspera
 {
-    char paciente[100];
+    Paciente paciente; //para tener toda la info de pacientes completa
+    int prioridad;
     NodoListaEspera* siguiente;
 };
 

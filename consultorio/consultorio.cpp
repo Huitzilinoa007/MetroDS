@@ -31,7 +31,7 @@ void createConsultorios(){
 }
 //Función para agregar consultorios adicionales
 void insertConsultorio(){
-    char medico[60];
+    char medico[80];
 
     //Solicitud de datos referentes al consultorio
     cout<<"\n\n=================================";
@@ -39,7 +39,7 @@ void insertConsultorio(){
     cout<<"\n=================================";
     cin.ignore();
     cout<<"\nNombre del médico asignado: ";
-    cin.getline(medico, 60);
+    cin.getline(medico, 80);
 
     //Se crea el nuevo nodo a insertar a la lista de consultorios
     NodoConsultorio* newConsultorio = (NodoConsultorio*) malloc(sizeof(NodoConsultorio));
@@ -85,7 +85,7 @@ void updateConsultorio(){
     if(consultorio == NULL){
         cout<<"\nNo se encontró el consultorio #" << numBuscar;
     }else{
-        char medicoNuevo[60];
+        char medicoNuevo[80];
         int opc;
         printConsultorio(consultorio);
         cout<<"\n¿Qué desea realizar?";
@@ -105,7 +105,7 @@ void updateConsultorio(){
                     cout<<"\n\n---------------------------------";
                     cin.ignore();
                     cout<<"\nNombre del médico asignado: ";
-                    cin.getline(medicoNuevo, 60);
+                    cin.getline(medicoNuevo, 80);
                     strcpy(consultorio->consultorio.medico, medicoNuevo);
                     strcpy(consultorio->consultorio.paciente, "Ninguno"); //Asignación por defecto
                 }else{
@@ -122,7 +122,7 @@ void updateConsultorio(){
                 if(consultorio->consultorio.estado != 0){
                     cout << "Médico asignado (actual): " << consultorio->consultorio.medico << "\n";
                     cout << "Ingrese el nuevo nombre del médico: ";
-                    cin.getline(medicoNuevo, 60);
+                    cin.getline(medicoNuevo, 80);
                     //actualización
                     strcpy(consultorio->consultorio.medico, medicoNuevo);
                     cout << "Médico actualizado\n";

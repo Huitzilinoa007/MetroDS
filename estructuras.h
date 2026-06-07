@@ -34,11 +34,11 @@ struct NodoConsultorio
 };
 
 //Lista de Espera
-struct NodoListaEspera
+struct NodoCola
 {
     Paciente paciente; //para tener toda la info de pacientes completa
     int prioridad;
-    NodoListaEspera* siguiente;
+    NodoCola* siguiente;
 };
 
 // Historial (pila)

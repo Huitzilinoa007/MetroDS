@@ -9,8 +9,9 @@ struct NodoCola {
     NodoCola* siguiente;
 };
 
-void agregarACola(Paciente p, int prioridad);
+void agregarACola();
 void atenderPaciente();
+void finalizarConsulta();
 void mostrarColaEspera();
 
 #endif

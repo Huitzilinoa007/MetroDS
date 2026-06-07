@@ -2,6 +2,7 @@
 #include "menu.h"
 #include "../paciente/paciente.h"
 #include "../consultorio/consultorio.h"
+#include "../atencion/atencion.h"
 
 using namespace std;
 
@@ -147,7 +148,44 @@ void menuConsultorios(){
     }while(verifi);
 }
 void menuAtencionMedica(){
-    cout<<"Atención médica";
+    bool verifi;
+    createConsultorios();
+    do{
+        cout<<"\n\n=================================";
+        cout<<"\nAtención médica";
+        cout<<"\n=================================";
+        cout<<"\n\n1.- Agregar paciente a la lista de espera";
+        cout<<"\n2.- Atender paciente";
+        cout<<"\n3.- Finalizar consulta";
+        cout<<"\n4.- Mostrar lista de espera";
+        cout<<"\n5.- Salir\n\nIngrese el número de la operación que desea realizar: ";
+        cout<<"";
+
+        int opc = 0;
+        cin>>opc;
+
+        switch (opc){
+        case 1:
+            agregarACola();
+            break;
+        case 2:
+            atenderPaciente();
+            break;
+        case 3:
+            finalizarConsulta();
+            break;
+        case 4:
+            mostrarColaEspera();
+            break;
+        case 5:
+            verifi = false;
+            break;
+        default:
+            verifi = false;
+            break;
+        }
+
+    }while(verifi);
 }
 void menuConsultas(){
     cout<<"Consultas";

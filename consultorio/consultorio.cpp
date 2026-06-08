@@ -9,6 +9,9 @@ NodoConsultorio *headConsultorio = NULL;
 
 // Se crea una cantidad "default" de consultorios cerrados
 void createConsultorios(){
+    if(headConsultorio != NULL){
+        return;
+    }
     for (int i = 1; i <= 5; i++){
         NodoConsultorio *nuevo = (NodoConsultorio *)malloc(sizeof(NodoConsultorio));
         nuevo->consultorio.numero = i;

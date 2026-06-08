@@ -22,7 +22,8 @@ struct Consultorio
 {
     int numero;
     char medico[80];
-    char paciente[80];
+    char pacienteNss[11];
+    //char paciente[80];
     int estado;
     int disponibilidad;
 };

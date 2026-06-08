@@ -13,7 +13,8 @@ void createConsultorios(){
         NodoConsultorio *nuevo = (NodoConsultorio *)malloc(sizeof(NodoConsultorio));
         nuevo->consultorio.numero = i;
         strcpy(nuevo->consultorio.medico, "Sin Asignar");
-        strcpy(nuevo->consultorio.paciente, "Ninguno");
+        strcpy(nuevo->consultorio.pacienteNss, "N/A");
+        //strcpy(nuevo->consultorio.paciente, "Ninguno");
         nuevo->consultorio.estado = 0;         // Empiezan inhabilitados (0), 1-> habilitados
         nuevo->consultorio.disponibilidad = 0; // 0->No Disponible, 1->Disponible
         nuevo->siguiente = NULL;
@@ -39,7 +40,7 @@ void insertConsultorio(){
     cout << "\nRegistar nuevo consultorio";
     cout << "\n=================================";
     cin.ignore();
-    cout << "\nNombre del médico asignado: ";
+    cout << "\nNombre completo del médico asignado: ";
     cin.getline(medico, 80);
 
     // Se crea el nuevo nodo a insertar a la lista de consultorios
@@ -49,7 +50,8 @@ void insertConsultorio(){
         return;
     }
     strcpy(newConsultorio->consultorio.medico, medico);
-    strcpy(newConsultorio->consultorio.paciente, "Ninguno"); // Asignación por defecto
+    strcpy(newConsultorio->consultorio.pacienteNss, "N/A");
+    //strcpy(newConsultorio->consultorio.paciente, "Ninguno"); // Asignación por defecto
     newConsultorio->consultorio.estado = 1;
     newConsultorio->consultorio.disponibilidad = 1;
     newConsultorio->siguiente = NULL;
@@ -114,14 +116,16 @@ void updateConsultorio(){
             // registrar médico después de habilitar un consultorio
             cout << "\n\n---------------------------------";
             cin.ignore();
-            cout << "\nNombre del médico asignado: ";
+            cout << "\nNombre completo del médico asignado: ";
             cin.getline(medicoNuevo, 80);
             strcpy(consultorio->consultorio.medico, medicoNuevo);
-            strcpy(consultorio->consultorio.paciente, "Ninguno"); // Asignación por defecto
+            strcpy(consultorio->consultorio.pacienteNss, "N/A");
+            //strcpy(consultorio->consultorio.paciente, "Ninguno"); // Asignación por defecto
         }
         else{
             strcpy(consultorio->consultorio.medico, "Sin Asignar");
-            strcpy(consultorio->consultorio.paciente, "Ninguno");
+            strcpy(consultorio->consultorio.pacienteNss, "N/A");
+            //strcpy(consultorio->consultorio.paciente, "Ninguno");
             consultorio->consultorio.estado = 0;
             consultorio->consultorio.disponibilidad = 0;
 
@@ -140,7 +144,7 @@ void updateConsultorio(){
         }
         cout << "Médico asignado (actual): " << consultorio->consultorio.medico << "\n";
         cin.ignore();
-        cout << "Ingrese el nuevo nombre del médico: ";
+        cout << "Ingrese el nombre completo del médico nuevo: ";
         cin.getline(medicoNuevo, 80);
         // actualización
         strcpy(consultorio->consultorio.medico, medicoNuevo);
@@ -205,18 +209,19 @@ void printConsultorio(NodoConsultorio *consultorio){
     cout << "\n----------------------------------------";
 
     cout << "\nMédico asignado: " << consultorio->consultorio.medico;
-    if (consultorio->consultorio.estado == 0){
-        cout << "\nEstado: Inhabilitado";
+    cout << "\nEstado: " << (consultorio->consultorio.estado == 0 ? "Inhabilitado" : "Habilitado");
+    cout << "\nDisponibilidad: " << (consultorio->consultorio.disponibilidad == 0 ? "----- No Disponible -----" : "------- Disponible ------");
+    //cout << "\nPaciente actual: " << consultorio->consultorio.paciente;
+    if (consultorio->consultorio.disponibilidad == 0) {
+        extern NodoPaciente* getPacienteByNSS(char* nss); 
+        NodoPaciente* p = getPacienteByNSS(consultorio->consultorio.pacienteNss);
+        if(p != NULL) {
+            cout << "\nPaciente actual: " << p->paciente.nombre << " " << p->paciente.apellidos;
+        } else {
+            cout << "\nPaciente actual: " << consultorio->consultorio.pacienteNss;
+        }
+    } else {
+        cout << "\nPaciente actual: Ninguno";
     }
-    else{
-        cout << "\nEstado: Habilitado";
-    }
-    if (consultorio->consultorio.disponibilidad == 0){
-        cout << "\n----- No Disponible -----";
-    }
-    else{
-        cout << "\n------- Disponible ------";
-    }
-    cout << "\nPaciente actual: " << consultorio->consultorio.paciente;
     cout << "\n";
 }

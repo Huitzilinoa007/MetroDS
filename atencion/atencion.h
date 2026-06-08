@@ -3,12 +3,6 @@
 
 #include "../estructuras.h"
 
-struct NodoCola {
-    Paciente paciente;
-    int prioridad;
-    NodoCola* siguiente;
-};
-
 void agregarACola();
 void atenderPaciente();
 void finalizarConsulta();

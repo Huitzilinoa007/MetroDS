@@ -178,7 +178,7 @@ void deletePaciente(){
     cout<<"\n=======================================";
     cout<<"\n\nIngrese el NSS del paciente a eliminar: ";
     cin>>nss;
-
+    
     bool pacienteBorrado = deletePacienteByNSS(nss);
     if(deletePacienteByNSS){
         cout<<"El paciente con NSS: " << nss << " fue eliminado con éxito";

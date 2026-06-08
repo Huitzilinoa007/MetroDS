@@ -9,28 +9,7 @@
 using namespace std;
 NodoCola* frenteCola = NULL;
 
-const char* getNivelPrioridad(int prioridad){
-    switch(prioridad){
-        case 0:
-            return "CONSULTA GENERAL";
-        case 1:
-            return "MENOR DE EDAD";
-        case 2:
-            return "PERSONA CON DISCAPACIDAD";
-        case 3:
-            return "MAYOR DE EDAD";
-        case 4:
-            return "EMBARAZO";
-        case 5:
-            return "URGENCIA NO CRITICA";
-        case 6:
-            return "URGENCIA GRAVE";
-        case 7:
-            return "RIESGO VITAL";
-        default:
-            return "DESCONOCIDA";
-    }
-}
+extern const char* getNivelPrioridad(int prioridad);
 //función para agregar a la lista de espera
 void agregarACola(){
     char nssBuscar[11];
@@ -45,9 +24,7 @@ void agregarACola(){
     NodoPaciente* nodoP = getPacienteByNSS(nssBuscar);
 
     if (nodoP == NULL) {
-        cout << "\nEl NSS no está registrado en el sistema";
-        cout << "\nAccediendo al alta del paciente...\n";
-        
+        cout << "\nEl NSS no está registrado. Accediendo al alta del paciente...\n";
         insertPaciente(); //registramos al paciente
         
         nodoP = getPacienteByNSS(nssBuscar);
@@ -67,6 +44,7 @@ void agregarACola(){
     int nuevaPrioridad;
     
     cout << "\nPaciente encontrado: " << nodoP->paciente.nombre << " " << nodoP->paciente.apellidos;
+
     cout << "\nIngrese el motivo de consulta: ";
     cin.ignore();
     cin.getline(enfermedadActual, 40);
@@ -133,13 +111,14 @@ void atenderPaciente(){
         nodoActual->paciente.estadoRevision = 2; //se encuentra en consulta ahora
     }
     //asignamos al consultorio la nueva información
-    strcpy(consDestino->consultorio.paciente, pacienteActual->paciente.nombre); 
+    //strcpy(consDestino->consultorio.paciente, pacienteActual->paciente.nombre); 
+    strcpy(consDestino->consultorio.pacienteNss, pacienteActual->paciente.nss);
     consDestino->consultorio.disponibilidad = 0;
 
     cout<<"\n\n=================================";
     cout<<"\n      Ingreso a consultorio";
     cout<<"\n=================================";
-    cout<<"\nPaciente: "<< pacienteActual->paciente.nombre;
+    cout<<"\nPaciente: " << pacienteActual->paciente.nombre << " " << pacienteActual->paciente.apellidos;
     cout<<"\nNSS: " << pacienteActual->paciente.nss;
     cout<<"\nMotivo: "<< pacienteActual->paciente.enfermedad;
     cout<<"\n[!]: "<< getNivelPrioridad(pacienteActual->prioridad);
@@ -185,16 +164,16 @@ void finalizarConsulta(){
     extern NodoPaciente* headPaciente;
     NodoPaciente* tempP = headPaciente;
     while(tempP != NULL) {
-        if(strcmp(tempP->paciente.nombre, consBuscado->consultorio.paciente) == 0 && tempP->paciente.estadoRevision == 2) {
+        if(strcmp(tempP->paciente.nss, consBuscado->consultorio.pacienteNss) == 0 && tempP->paciente.estadoRevision == 2) {
             tempP->paciente.estadoRevision = 3; //se cambia a atendido
             break;
         }
         tempP = tempP->siguiente;
     }
-    cout << "\n >>> Finalizando consulta del paciente: " << consBuscado->consultorio.paciente;
+    cout << "\n >>> Finalizando consulta del paciente con NSS: " << consBuscado->consultorio.pacienteNss;
     
     // reestablecemos el consultorio
-    strcpy(consBuscado->consultorio.paciente, "Ninguno");
+    strcpy(consBuscado->consultorio.pacienteNss, "N/A");
     consBuscado->consultorio.disponibilidad = 1; 
 
     cout << "\nEl consultorio #" << numCons << " ahora está disponible";
@@ -212,7 +191,7 @@ void mostrarColaEspera(){
     NodoCola* temp = frenteCola;
     int pos = 1;
     while(temp != NULL){
-        cout << "\n " << pos << ".- " << temp->paciente.nombre; 
+        cout << "\n " << pos << ".- " << temp->paciente.nombre << " " << temp->paciente.apellidos; 
         cout << "\nNSS: " << temp->paciente.nss;
         cout << "\n[!] Prioridad: " << getNivelPrioridad(temp->prioridad);
         cout << "\n-----------------------------------------";
